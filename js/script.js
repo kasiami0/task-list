@@ -61,6 +61,7 @@
 
         const newTaskContent = document.querySelector(".js-newTask").value.trim();
         if (newTaskContent === "") {
+            clearAndFocusInput();
             return;
         }
         addNewTask(newTaskContent);
