@@ -1,13 +1,12 @@
 .list {
-    min-height: 60px;
+    min-height: 90px;
     list-style-type: none;
-    padding: 0px 25px;
-    margin-top: 0;
-    margin-bottom: 25px;
+    margin: 0px;
+    padding: 0px 20px 20px;
 }
 
 .list__item {
-    padding: 15px 5px;
+    padding: 20px;
     border-bottom: 1px solid #ddd;
     display: grid;
     grid-template-columns: auto 1fr auto;
