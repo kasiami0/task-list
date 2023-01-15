@@ -2,11 +2,11 @@
     min-height: 90px;
     list-style-type: none;
     margin: 0px;
-    padding: 0px 20px 20px;
+    padding: 20px;
 }
 
 .list__item {
-    padding: 20px;
+    padding: 10px;
     border-bottom: 1px solid #ddd;
     display: grid;
     grid-template-columns: auto 1fr auto;
