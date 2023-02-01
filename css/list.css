@@ -23,6 +23,7 @@
     width: 30px;
     color: white;
     border: none;
+    transition: background 1s;
 }
 
 .list__button--done {
