@@ -1,6 +1,6 @@
 # Task List
 
-![animated presentation of the task list](https://github.com/kasiami0/task-list/blob/main/images/animation.gif?raw=true)
+![page view](https://github.com/kasiami0/task-list/blob/main/images/share.png?raw=true)
 
 ## Demo
 
@@ -18,3 +18,4 @@ The task list allows you to add new tasks, mark them as done and / or remove the
 - BEM
 - ES6+ Features
 - Grid
+- Immutability
