@@ -1,10 +1,22 @@
 {
-    const tasks = [];
+    let tasks = [];
+    let hideDoneTasks = false;
+
+    const hideShowTask = () => {
+        hideDoneTasks = !hideDoneTasks;
+        render();
+    };
+
+    const toggleAllTasksDone = () => {
+        tasks = tasks.map(task => ({ ...task, done: true }));
+        render();
+    };
 
     const addNewTask = (newTaskContent) => {
-        tasks.push({
-            content: newTaskContent
-        });
+        tasks = [
+            ...tasks,
+            { content: newTaskContent, done: false },
+        ];
         render();
     };
 
@@ -14,13 +26,53 @@
     };
 
     const toggleTaskDone = (taskIndex) => {
-        tasks[taskIndex].done = !tasks[taskIndex].done;
+        tasks = [
+            ...tasks.slice(0, taskIndex),
+            { ...tasks[taskIndex], done: !tasks[taskIndex].done },
+            ...tasks.slice(taskIndex + 1),
+        ];
         render();
     };
 
     const removeTask = (taskIndex) => {
-        tasks.splice(taskIndex, 1);
+        tasks = [
+            ...tasks.slice(0, taskIndex),
+            ...tasks.slice(taskIndex + 1),
+        ];
         render();
+    };
+
+    const renderTasks = () => {
+        let htmlString = "";
+        for (const task of tasks) {
+            htmlString +=
+                `<li class="list__item ${task.done && hideDoneTasks ? "list__item--hidden" : ""}">
+                    <button class="list__button list__button--done js-done">
+                        ${task.done ? "✔" : ""}
+                    </button>
+                    <span class="list__itemText ${task.done ? "list__itemContent--done" : ""}">
+                        ${task.content}
+                    </span>
+                    <button class="list__button list__button--remove js-remove">
+                        🗑
+                    </button>
+                </li>`;
+        }
+        document.querySelector(".js-list").innerHTML = htmlString;
+    };
+
+    const renderButtons = () => {
+        let htmlButtons = "";
+        if (tasks.length > 0) {
+            htmlButtons +=
+                `<button class="section__button js-hideShow">
+                    ${hideDoneTasks ? "Pokaż" : "Ukryj"} ukończone
+                </button>
+                <button ${tasks.every(task => task.done) ? "disabled" : ""} class="section__button js-doneAll">
+                    Ukończ wszystkie
+                </button>`;
+        }
+        document.querySelector(".js-buttonsContainer").innerHTML = htmlButtons;
     };
 
     const bindEvents = () => {
@@ -39,26 +91,23 @@
         });
     };
 
-    const render = () => {
-        let htmlString = "";
-
-        for (const task of tasks) {
-            htmlString +=
-                `<li class="list__item">
-                    <button class="list__button list__button--done js-done">
-                        ${task.done ? "✔" : ""}
-                    </button>
-                    <span class="list__itemText ${task.done ? "list__itemContent--done" : ""}">
-                        ${task.content}
-                    </span>
-                    <button class="list__button list__button--remove js-remove">
-                        🗑
-                    </button>
-                </li>`;
+    const bindButtonsEvents = () => {
+        const hideShowButton = document.querySelector(".js-hideShow");
+        if (hideShowButton) {
+            hideShowButton.addEventListener("click", hideShowTask);
         }
-        document.querySelector(".js-list").innerHTML = htmlString;
 
+        const doneAllButton = document.querySelector(".js-doneAll");
+        if (doneAllButton) {
+            doneAllButton.addEventListener("click", toggleAllTasksDone);
+        }
+    };
+
+    const render = () => {
+        renderTasks();
+        renderButtons();
         bindEvents();
+        bindButtonsEvents();
     };
 
     const onFormSubmit = (event) => {
