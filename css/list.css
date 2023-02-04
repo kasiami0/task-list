@@ -40,6 +40,7 @@
 
 .list__button--done:hover {
     background-color: hsl(123, 49%, 35%);
+    cursor: pointer;
 }
 
 .list__button--remove {
@@ -52,4 +53,5 @@
 
 .list__button--remove:hover {
     background-color: hsl(0, 100%, 40%);
+    cursor: pointer;
 }

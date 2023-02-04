@@ -20,9 +20,9 @@
         render();
     };
 
-    const clearAndFocusInput = (newTask) => {
-        newTask.value = "";
-        newTask.focus();
+    const clearAndFocusInput = (newTaskElement) => {
+        newTaskElement.value = "";
+        newTaskElement.focus();
     };
 
     const toggleTaskDone = (taskIndex) => {
@@ -112,14 +112,16 @@
 
     const onFormSubmit = (event) => {
         event.preventDefault();
-        const newTask = document.querySelector(".js-newTask");
-        const newTaskContent = document.querySelector(".js-newTask").value.trim();
+        const newTaskElement = document.querySelector(".js-newTask");
+        const newTaskContent = newTaskElement.value.trim();
+        
         if (newTaskContent === "") {
-            clearAndFocusInput(newTask);
+            clearAndFocusInput(newTaskElement);
             return;
         }
+
         addNewTask(newTaskContent);
-        clearAndFocusInput(newTask);
+        clearAndFocusInput(newTaskElement);
     };
 
     const init = () => {
