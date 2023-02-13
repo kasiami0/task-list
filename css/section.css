@@ -57,4 +57,5 @@
 
 .section__button:disabled {
     color: #b7b7b7;
+    cursor: default;
 }
